@@ -1,0 +1,8 @@
+name: CustomEffects
+version: 1.0
+main: potioneffects.customeffects.CustomEffects
+api-version: 1.20
+commands:
+  numbness:
+    description: Gives the player temporary invincibility and then applies the damage that was taken during the invincibility.
+    usage: /numbness <player>
