@@ -7,6 +7,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
+import net.kyori.adventure.text.Component;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -17,7 +18,7 @@ public class DamageListener implements Listener {
     private static JavaPlugin plugin;
 
     public DamageListener(JavaPlugin plugin) {
-        this.plugin = plugin; // Store the plugin instance
+        DamageListener.plugin = plugin; // Store the plugin instance
     }
     public static void makeInvincible(Player player) {
         invinciblePlayers.put(player.getUniqueId(), 0.0);
@@ -55,7 +56,8 @@ public class DamageListener implements Listener {
         Player player = event.getEntity();
         if (player.hasMetadata("LastDamageByInvincibility")) {
             // Set a custom death message
-            event.setDeathMessage(player.getName() + " couldn't survive the aftermath of the numbness.");
+            Component componentDeathMessage = Component.text(player.getName() + " couldn't survive the aftermath of the numbness.");
+            event.deathMessage(componentDeathMessage);
 
         }
     }

@@ -16,8 +16,13 @@ public class NumbnessCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length != 1) {
-            sender.sendMessage("Usage: /numbness <player>");
+        // Check if the player has permission
+        if (!sender.hasPermission("numbness.use")) {
+            sender.sendMessage("You do not have permission to use this command.");
+            return true;
+        }
+        if (args.length != 2) {
+            sender.sendMessage("Usage: /numbness <player> [duration]");
             return true;
         }
         Player player = Bukkit.getPlayer(args[0]);
@@ -27,12 +32,23 @@ public class NumbnessCommand implements CommandExecutor {
         }
 
         DamageListener.makeInvincible(player);
+
+        int duration;
+
+        try {
+            duration = args[1] != null ? Integer.parseInt(args[1]) : 30;
+        } catch (NumberFormatException e) {
+            sender.sendMessage("Invalid duration. Please provide a valid number.");
+            return true;
+        }
+
+        int durationTicks = duration * 20; // 20 ticks = 1 second
         new BukkitRunnable() {
             @Override
             public void run() {
                 DamageListener.applyRecordedDamage(player);
             }
-        }.runTaskLater(plugin, 600); // 600 ticks = 30 seconds
+        }.runTaskLater(plugin, durationTicks); // 600 ticks = 30 seconds
         return true;
     }
 }
