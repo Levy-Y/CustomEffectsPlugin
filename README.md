@@ -20,13 +20,13 @@ A basic Minecraft plugin that adds a new "effect" to your server, called numbnes
 
 To apply the numbness effect to a player, use the following command:
 
-- /numbness `<player>`
+- /numbness `<player>` `[duration in seconds]`
 
-Replace `<player>` with the actual name of the player you wish to affect.
+Replace `<player>` with the actual name of the player you wish to affect and `[duration in seconds]` with whatever time you want it to be.
 
 ## Permissions
 
-Currently, the `/numbness` command can be used by server operators. Future versions may include configurable permissions for finer control.
+The `/numbness` command can be used by server operators, and players with the `numbness.use` permission.
 
 ## Configuration
 
